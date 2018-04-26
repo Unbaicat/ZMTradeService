@@ -9,7 +9,7 @@
 点击连接，成功的话右侧会输出连接结果；
 
 4、登录交易通系统请求：
-LoginID为交易通服务管理器分配的登录账号ID，LoginPW为登录密码，Encode为加密方式，0为明文密码，1为SH1加密后的密码串
+LoginID为交易通服务管理器分配的登录账号ID，LoginPW为登录密码，Encode为加密方式，0为明文密码，1为SHA1加密后的密码串
 举例：{"req":"Server_Login","rid":"1","para":{"LoginID" : "","LoginPW" : "","Encode" : 0}}
 右侧会返回请求返回，如果有事件通知返回，也在右侧显示出来；
 
