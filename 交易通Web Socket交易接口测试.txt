@@ -8,14 +8,16 @@
 举例：ws://192.168.1.6:888?rid=DFC76286A2F293472D6166F72CA58EAB&flag=1
 点击连接，成功的话右侧会输出连接结果；
 
+注意：以下协议的请求参数rid代表每个请求的序号，长整型，服务器会原样返回用于标识是哪个请求的数据结果:
+
 4、登录交易通系统请求：
-LoginID为交易通服务管理器分配的登录账号ID，LoginPW为登录密码，Encode为加密方式，0为明文密码，1为SHA1加密后的密码串
+LoginID为交易通服务管理器分配的登录账号ID，LoginPW为登录密码(系统内置默认管理员root及密码root888)，Encode为加密方式，0为明文密码，1为SHA1加密后的密码串
 举例：{"req":"Server_Login","rid":"1","para":{"LoginID" : "","LoginPW" : "","Encode" : 0}}
 右侧会返回请求返回，如果有事件通知返回，也在右侧显示出来；
 
 5、发送交易服务器初始化请求：
-Broker为券商ID，Net指定网络类型，ClientVer指定登录交易服务器所用的版本号，为空时使用默认值
-举例：{"req":"Trade_Init","rid":"2","para":{"Broker" : 32,"Net" : 0,"Server" : 2,"ClientVer" : "","TryConn" : 3}}
+Broker为券商ID，Net指定网络类型，ClientVer指定登录交易服务器所用的版本号，为空时使用默认值，Core指定内核版本，默认0，新内核为1
+举例：{"req":"Trade_Init","rid":"2","para":{"Broker" : 32,"Net" : 0,"Server" : 2,"ClientVer" : "","TryConn" : 3,"Core" : 0}}
 右侧会返回请求返回，如果有事件通知返回，也在右侧显示出来；
 
 6、普通方式登录交易账号请求：
