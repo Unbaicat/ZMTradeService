@@ -8,16 +8,14 @@
 举例：ws://192.168.1.6:888?rid=DFC76286A2F293472D6166F72CA58EAB&flag=1
 点击连接，成功的话右侧会输出连接结果；
 
-注意：以下协议的请求参数rid代表每个请求的序号，长整型，服务器会原样返回用于标识是哪个请求的数据结果:
-
 4、登录交易通系统请求：
-LoginID为交易通服务管理器分配的登录账号ID，LoginPW为登录密码(系统内置默认管理员root及密码root888)，Encode为加密方式，0为明文密码，1为SHA1加密后的密码串
+LoginID为交易通服务管理器分配的登录账号ID，LoginPW为登录密码，Encode为加密方式，0为明文密码，1为SHA1加密后的密码串
 举例：{"req":"Server_Login","rid":"1","para":{"LoginID" : "","LoginPW" : "","Encode" : 0}}
 右侧会返回请求返回，如果有事件通知返回，也在右侧显示出来；
 
 5、发送交易服务器初始化请求：
-Broker为券商ID，Net指定网络类型，ClientVer指定登录交易服务器所用的版本号，为空时使用默认值，Core指定内核版本，默认0，新内核为1
-举例：{"req":"Trade_Init","rid":"2","para":{"Broker" : 32,"Net" : 0,"Server" : 2,"ClientVer" : "","TryConn" : 3,"Core" : 0}}
+Broker为券商ID，Net指定网络类型，ClientVer指定登录交易服务器所用的版本号，为空时使用默认值，GetCount指定返回交易服务器信息条数，Core指定内核版本，默认0，新内核为1，TryConn服务器出现错误时自动重新登录连接尝试次数
+举例：{"req":"Trade_Init","rid":"2","para":{"Broker" : 32,"Net" : 0,"Server" : 2,"ClientVer" : "","TryConn" : 3,"GetCount" : 16,"Core" : 0}}
 右侧会返回请求返回，如果有事件通知返回，也在右侧显示出来；
 
 6、普通方式登录交易账号请求：
@@ -84,45 +82,42 @@ ID为必须传的参数，ID由登录交易通系统后获得
 如果委托出错，类似这样的返回：
 {"event":"Trade_SendOrderEvent","rid":"7","sid":"2","data":{"ErrInfo":"[60200][可用资金不足][fund_account=**********,money_type=0,p_occur_balance=258.10,p_enable_balance=97.82]"}}
 
-11、撤单
-{"req":"Trade_CancelOrder","rid":"8","para":{"OrderID" : "4889","Type" : 1}}
-
-11、板块类别查询
+10、板块类别查询
 {"req":"Tdx_GetPlateList","rid":"21","para":{"JsonType" : 1,"PType" : 4}}
 
-12、板块成员查询
+11、板块成员查询
 {"req":"Tdx_GetPlateMember","rid":"22","para":{"JsonType" : 1,"PID" : 206}}
 
-13、股票所属板块查询
+12、股票所属板块查询
 {"req":"Tdx_GetStockPlate","rid":"23","para":{"JsonType" : 0,"Code" : "002610"}}
 
-14、根据ID取股票或板块信息
+13、根据ID取股票或板块信息
 /// 取股票
 {"req":"Tdx_GetInfoByID","rid":"24","para":{"SType" : 2,"JsonType" : 0,"ID" : "5"}}
 /// 取板块
 {"req":"Tdx_GetInfoByID","rid":"25","para":{"SType" : 1,"JsonType" : 0,"ID" : "7"}}
 
-15、根据名称模糊查询股票或板块
+14、根据名称模糊查询股票或板块
 /// 查询股票，可能多条记录，分别属于不同板块
 {"req":"Tdx_SearchByName","rid":"26","para":{"SType" : 2,"JsonType" : 0,"Name" : "京东方"}}
 /// 查询板块
 {"req":"Tdx_SearchByName","rid":"27","para":{"SType" : 1,"JsonType" : 0,"Name" : "沪深"}}
 
-16、根据代码模糊查询股票或板块
+15、根据代码模糊查询股票或板块
 /// 查询股票，可能多条记录，分别属于不同板块
 {"req":"Tdx_SearchByCode","rid":"28","para":{"SType" : 2,"JsonType" : 0,"Code" : "00007"}}
 /// 查询板块
 {"req":"Tdx_SearchByCode","rid":"29","para":{"SType" : 1,"JsonType" : 0,"Code" : "399"}}
 
-17、查询5档行情数据
+16、查询5档行情数据
 {"req":"Trade_QueryQuote","rid":"30","para":{"Codes" : "000001",
    "JsonType" : 1,
    "Server" : 2}}
 
-18、添加行情推送，支持多只股票，Timer为定时刷新毫秒
+17、添加行情推送，支持多只股票，Timer为定时刷新毫秒
 {"req":"Market_AddTimerQuote","rid":"31","para":{"Codes" : "000001,600000", "Timer" : 1000, "Server" : 2}}
 
-19、退出交易登录
+18、退出交易登录
 退出交易登录时需要指定交易登录返回的ID和交易服务器类型
 {"req":"Trade_LogOut","rid":"35","para":{
 "ID" : 1,

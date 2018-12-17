@@ -9,8 +9,8 @@
 点击连接，成功的话右侧会输出连接结果；
 
 4、发送行情服务器初始化请求：
-Broker为券商ID(L2行情不需要)，Net指定网络类型。Server定义如下：1为普通行情服务器，2为交易服务器，4是扩展行情服务器，8为Level2行情服务器
-举例：{"req":"Trade_Init","rid":"1","para":{"Broker" : 32,"Net" : 0,"Server" : 1,"TryConn" : 3}}
+Broker为券商ID(L2行情不需要)，Net指定网络类型。Server定义如下：1为普通行情服务器，2为交易服务器，4是扩展行情服务器，8为Level2行情服务器，GetCount指定返回行情服务器信息条数，TryConn服务器出现错误时自动重新登录连接尝试次数
+举例：{"req":"Trade_Init","rid":"1","para":{"Broker" : 32,"Net" : 0,"Server" : 1,"TryConn" : 3,"GetCount" : 32}}
 右侧会返回请求返回，如果有事件通知返回，也在右侧显示出来；
 
 5、登录普通行情请求：
